@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import EnabledCount from "./EnabledCount";
+import EnabledCount from "@/refresh-components/EnabledCount";
 
 const meta: Meta<typeof EnabledCount> = {
   title: "refresh-components/EnabledCount",
@@ -20,17 +20,8 @@ export const Default: Story = {
   },
 };
 
-export const WithName: Story = {
-  args: {
-    name: "connector",
-    enabledCount: 3,
-    totalCount: 10,
-  },
-};
-
 export const AllEnabled: Story = {
   args: {
-    name: "source",
     enabledCount: 8,
     totalCount: 8,
   },
@@ -38,7 +29,6 @@ export const AllEnabled: Story = {
 
 export const NoneEnabled: Story = {
   args: {
-    name: "item",
     enabledCount: 0,
     totalCount: 15,
   },
@@ -46,7 +36,6 @@ export const NoneEnabled: Story = {
 
 export const SingleItem: Story = {
   args: {
-    name: "document",
     enabledCount: 1,
     totalCount: 1,
   },

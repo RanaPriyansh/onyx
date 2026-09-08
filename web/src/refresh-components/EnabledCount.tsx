@@ -1,28 +1,36 @@
 "use client";
 
 import { memo } from "react";
-import Text from "@/refresh-components/texts/Text";
+import { useTranslations } from "next-intl";
+import { Text } from "@opal/components";
+import { richNodes } from "@opal/utils";
 
 interface EnabledCountProps {
-  name?: string;
   enabledCount: number;
   totalCount: number;
 }
 
-const EnabledCount = memo(
-  ({ name, enabledCount, totalCount }: EnabledCountProps) => {
-    return (
-      <Text text03 mainUiBody>
-        <Text mainUiBody className="text-action-selection-05">
-          {enabledCount}
-        </Text>
-        {` of ${totalCount} ${name ?? ""}${
-          name && totalCount !== 1 ? "s" : ""
-        }`}
-      </Text>
-    );
-  }
-);
+const EnabledCount = memo(({ enabledCount, totalCount }: EnabledCountProps) => {
+  const t = useTranslations("common");
+  return (
+    <Text font="main-ui-body" color="text-03">
+      {richNodes(
+        t.rich("enabledCount.label", {
+          enabled: enabledCount,
+          total: totalCount,
+          // The enabled figure takes the selection color, which Text has no token for.
+          count: (chunks) => (
+            <span className="text-action-selection-05">
+              <Text font="main-ui-body" color="inherit">
+                {richNodes(chunks)}
+              </Text>
+            </span>
+          ),
+        })
+      )}
+    </Text>
+  );
+});
 EnabledCount.displayName = "EnabledCount";
 
 export default EnabledCount;

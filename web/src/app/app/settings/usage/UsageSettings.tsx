@@ -321,11 +321,13 @@ function ModelPriceSection({ prices, defaultPrice }: ModelPriceSectionProps) {
                               : price.model}
                           </Text>
                           <Text font="secondary-body" color="text-03" nowrap>
-                            {`${formatMtok(price.input_per_mtok)} in · ${formatMtok(
-                              price.output_per_mtok
-                            )} out · ${formatMtok(
-                              price.cache_per_mtok ?? price.input_per_mtok
-                            )} cache`}
+                            {t("modelPrices.priceRow", {
+                              input: formatMtok(price.input_per_mtok),
+                              output: formatMtok(price.output_per_mtok),
+                              cache: formatMtok(
+                                price.cache_per_mtok ?? price.input_per_mtok
+                              ),
+                            })}
                           </Text>
                         </div>
                       ))}
